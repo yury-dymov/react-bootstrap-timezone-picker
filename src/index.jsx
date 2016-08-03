@@ -1,4 +1,5 @@
 import React, { Component, PropTypes }  from 'react';
+import { findDOMNode }                  from 'react-dom';
 import classnames                       from 'classnames';
 import FormControl                      from 'react-bootstrap/lib/FormControl';
 
@@ -26,6 +27,7 @@ export default class TimezonePicker extends Component {
 
   static defaultProps = {
     timezones:    defaultTimezones,
+    initialValue: '',
     placeholder:  '',
     onChange:     () => {},
     overflow:     false
@@ -33,14 +35,14 @@ export default class TimezonePicker extends Component {
 
   state = {
     isOpen:     false,
-    focused:    -1,
+    focused:    0,
     value:      this.props.value || this.props.initialValue,
     timezones:  this.props.timezones
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
-      const value = this.getTimezone(nextProps.value);
+      const value = this.getTimezone(nextProps.value) || '';
 
       this.setState({ value });
     }
@@ -57,8 +59,7 @@ export default class TimezonePicker extends Component {
           return this.setState(
             { isOpen: true, focused: i },
             () => {
-              this.disableMouse = true;
-              this.list.children[Math.max(0, i - 3)].scrollIntoView();
+              this.scrollToIndex(i);
             }
           );
         }
@@ -69,7 +70,9 @@ export default class TimezonePicker extends Component {
   };
 
   handleBlur = () => {
-    if (!this.getTimezone(this.state.value)) {
+    const tz = this.getTimezone(this.state.value);
+
+    if (tz === undefined) {
       this.setState({ value: '', timezones: this.props.timezones });
       this.props.onChange('');
     }
@@ -78,13 +81,15 @@ export default class TimezonePicker extends Component {
   };
 
   handleFilterChange = (e) => {
+    const timezones = this.filterItems(e.target.value);
+
     this.setState({
-      timezones:  this.filterItems(e.target.value),
-      isOpen:     true,
-      focused:    -1,
-      value:      e.target.value
+      timezones,
+      isOpen:     keys(timezones).length > 0,
+      focused:    0,
+      value:      e.target.value || ''
     });
-  }
+  };
 
   handleKeyPress = (e) => {
     const { focused, timezones, isOpen } = this.state;
@@ -106,32 +111,31 @@ export default class TimezonePicker extends Component {
 
       this.setState({ focused: newFocused });
 
-      this.disableMouse = true;
-      this.list.children[Math.max(0, newFocused - 3)].scrollIntoView();
+      this.scrollToIndex(newFocused);
     } else if (e.which === ENTER_KEY) {
-      this.handleSelect(focused);
-
-      if (!isOpen) {
+      if (isOpen) {
+        this.handleSelect(focused);
+      } else {
         e.target.blur();
       }
     }
-  }
+  };
 
   handleSelect = (index) => {
     const { timezones } = this.state;
 
-    const key   = keys(timezones)[index];
-    const value = timezones[key];
+    const key   = keys(timezones)[index] || '';
+    const value = timezones[key] || '';
+
+    this.props.onChange(value);
 
     this.setState({
-      focused:    -1,
+      focused:    0,
       isOpen:     false,
       timezones:  this.props.timezones,
       value:      key
-    });
-
-    this.props.onChange(value);
-  }
+    }, () => findDOMNode(this.input).blur());
+  };
 
   handleMouseOver = (idx, e) => {
     if (e.pageX !== this.mouseX || e.pageY !== this.mouseY) {
@@ -155,7 +159,7 @@ export default class TimezonePicker extends Component {
     return keys(this.props.timezones).find(zone => zone === query || this.props.timezones[zone] === query);
   };
 
-  zoneCompare = (key, filter) => key.toLowerCase().includes(filter.toLowerCase().replace(/\s/g, ''));
+  zoneCompare = (key, filter) => key.toLowerCase().includes(filter.toLowerCase().trim());
 
   filterItems = (filter) => {
     const { timezones } = this.props;
@@ -173,6 +177,13 @@ export default class TimezonePicker extends Component {
     });
 
     return filteredTimezones;
+  };
+
+  scrollToIndex = (idx) => {
+    const index = Math.max(0, idx - 3);
+
+    this.disableMouse = true;
+    findDOMNode(this.list).scrollTop = this.list.children[index].offsetTop;
   };
 
   render() {
@@ -215,6 +226,7 @@ export default class TimezonePicker extends Component {
             onChange      = {this.handleFilterChange}
             onKeyDown     = {this.handleKeyPress}
             value         = {this.getTimezone(value) || value}
+            ref           = {c => this.input = c}
           />
           {isOpen && <ul className={listClass} ref={c => this.list = c}>
             {timezones}

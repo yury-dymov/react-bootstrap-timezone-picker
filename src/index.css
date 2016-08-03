@@ -48,8 +48,7 @@
     cursor: pointer
 }
 
-.timezone-picker-open,
-.timezone-picker-list {
+.timezone-picker-open .timezone-picker-list {
     display: block
 }
 
