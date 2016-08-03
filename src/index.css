@@ -36,6 +36,8 @@
 .timezone-picker-list-abs {
     position: absolute;
     background-color: white;
+    z-index: 2000;
+    opacity: 0.99;
 }
 
 .timezone-picker-list-item {
