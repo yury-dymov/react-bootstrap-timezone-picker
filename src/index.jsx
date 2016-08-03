@@ -19,8 +19,8 @@ export default class TimezonePicker extends Component {
     placeholder:  PropTypes.string,
     style:        PropTypes.any,
     timezones:    PropTypes.object,
-    initialValue: PropTypes.object,
-    value:        PropTypes.object,
+    initialValue: PropTypes.string,
+    value:        PropTypes.string,
     onChange:     PropTypes.func,
     absolute:     PropTypes.bool
   };

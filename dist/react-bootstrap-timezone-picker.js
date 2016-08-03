@@ -348,8 +348,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  placeholder: _react.PropTypes.string,
 	  style: _react.PropTypes.any,
 	  timezones: _react.PropTypes.object,
-	  initialValue: _react.PropTypes.object,
-	  value: _react.PropTypes.object,
+	  initialValue: _react.PropTypes.string,
+	  value: _react.PropTypes.string,
 	  onChange: _react.PropTypes.func,
 	  absolute: _react.PropTypes.bool
 	};
