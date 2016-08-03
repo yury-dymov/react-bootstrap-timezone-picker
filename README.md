@@ -1,6 +1,22 @@
 # react-bootstrap-timezone-picker
 Time zone picker for react-bootstrap - [DEMO](https://yury-dymov.github.io/react-bootstrap-timezone-picker)
 
+# Usage
+```
+import TimezonePicker from 'react-bootstrap-timezone-picker';
+import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
+...
+<TimezonePicker
+  initialValue  = {this.state.currentValue}
+  placeholder   = 'Select timezone...'
+  onChange      = {this.handleChange}
+  absolute      = {this.state.absolute}
+/>
+...
+```
+
+You can also check demo source code [here](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/demo/index.jsx).
+
 # Props
 | Prop        | Type           | Default  | Required | Description |
 | ------------- |:-------------:| :-----:|:------------:|:-----------|
