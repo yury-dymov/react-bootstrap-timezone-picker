@@ -1,0 +1,60 @@
+{
+  "name": "react-bootstrap-timezone-picker",
+  "version": "1.0.0",
+  "description": "Timezone picker for react-bootstrap",
+  "main": "dist/react-bootstrap-timezone-picker.min.js",
+  "scripts": {
+    "build:max": "node node_modules/webpack/bin/webpack --verbose --colors --display-error-details src/index.jsx dist/react-bootstrap-timezone-picker.js",
+    "build:min": "node node_modules/webpack/bin/webpack --verbose --colors --display-error-details -p src/index.jsx dist/react-bootstrap-timezone-picker.min.js",
+    "build:lib": "node node_modules/babel-cli/bin/babel src --out-dir lib",
+    "demo": "node node_modules/webpack/bin/webpack --verbose --colors --display-error-details --config webpack.demo.config.js -p demo/index.jsx demo/dist/index.js",
+    "build": "npm run build:lib && npm run build:max && npm run build:min",
+    "lint": "node node_modules/eslint/bin/eslint ./src/index.jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yury-dymov/react-bootstrap-timezone-picker.git"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "react-bootstrap",
+    "timezone",
+    "timezone",
+    "picker"
+  ],
+  "author": "Yuri Dymov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yury-dymov/react-bootstrap-timezone-picker/issues"
+  },
+  "homepage": "https://github.com/yury-dymov/react-bootstrap-timezone-picker#readme",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^3.2.2",
+    "eslint-plugin-import": "^1.12.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss-loader": "^0.9.1",
+    "react": "^15.2.0",
+    "react-bootstrap": "^0.30.1",
+    "react-dom": "^15.2.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.2",
+    "webpack": "^1.13.1",
+    "webpack-node-externals": "^1.3.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-bootstrap": "*"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash": "^4.14.1"
+  }
+}
