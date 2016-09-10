@@ -34,7 +34,6 @@
 
   "rules":{
     // Possible errors
-    "comma-dangle": [2, "never"],
     "no-cond-assign": [2, "always"],
     "no-constant-condition": 2,
     "no-control-regex": 2,
@@ -148,8 +147,7 @@
       "arraysInArrays": true
     }],
     "newline-after-var": [1, "always"],
-    "brace-style": [2, "1tbs"],
-    //        "camelcase": [2, { "properties": "always" }],
+    "camelcase": [2, { "properties": "always" }],
     "comma-spacing": [2, { "before": false, "after": true }],
     "comma-style": [2, "last"],
     "computed-property-spacing": [2, "never"],

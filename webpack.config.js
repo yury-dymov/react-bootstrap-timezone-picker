@@ -21,11 +21,9 @@ module.exports = {
   ],
   module:  {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
+      { test: /\.jsx?$/, loader: 'babel!eslint', exclude: /node_modules/ },
       { test: /\.json$/, loader: 'json',  exclude: /node_modules/ },
       { test: /\.css$/,  loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader') }
     ]
   }
 };
-
-

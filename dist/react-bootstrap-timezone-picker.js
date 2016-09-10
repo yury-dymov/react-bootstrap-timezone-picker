@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("classnames"), require("lodash/keys"), require("react"), require("react-bootstrap/lib/FormControl"), require("react-dom"));
+		module.exports = factory(require("classnames"), require("react"), require("react-bootstrap/lib/FormControl"), require("react-dom"));
 	else if(typeof define === 'function' && define.amd)
-		define(["classnames", "lodash/keys", "react", "react-bootstrap/lib/FormControl", "react-dom"], factory);
+		define(["classnames", "react", "react-bootstrap/lib/FormControl", "react-dom"], factory);
 	else if(typeof exports === 'object')
-		exports["react-bootstrap-timezone-picker"] = factory(require("classnames"), require("lodash/keys"), require("react"), require("react-bootstrap/lib/FormControl"), require("react-dom"));
+		exports["react-bootstrap-timezone-picker"] = factory(require("classnames"), require("react"), require("react-bootstrap/lib/FormControl"), require("react-dom"));
 	else
-		root["react-bootstrap-timezone-picker"] = factory(root["classnames"], root["lodash/keys"], root["react"], root["react-bootstrap/lib/FormControl"], root["react-dom"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__) {
+		root["react-bootstrap-timezone-picker"] = factory(root["classnames"], root["react"], root["react-bootstrap/lib/FormControl"], root["react-dom"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -64,23 +64,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = __webpack_require__(5);
+	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(7);
+	var _reactDom = __webpack_require__(6);
 
 	var _classnames = __webpack_require__(3);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _FormControl = __webpack_require__(6);
+	var _FormControl = __webpack_require__(5);
 
 	var _FormControl2 = _interopRequireDefault(_FormControl);
-
-	var _keys = __webpack_require__(4);
-
-	var _keys2 = _interopRequireDefault(_keys);
 
 	var _timezones = __webpack_require__(2);
 
@@ -100,164 +96,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	var DOWN_KEY = 40;
 	var ENTER_KEY = 13;
 
+	var propTypes = {
+	  absolute: _react.PropTypes.bool,
+	  className: _react.PropTypes.string,
+	  initialValue: _react.PropTypes.any,
+	  onChange: _react.PropTypes.func,
+	  placeholder: _react.PropTypes.string,
+	  style: _react.PropTypes.any,
+	  timezones: _react.PropTypes.object,
+	  value: _react.PropTypes.any
+	};
+
+	var defaultProps = {
+	  initialValue: '',
+	  placeholder: '',
+	  onChange: function onChange() {},
+	  overflow: false,
+	  timezones: _timezones2.default
+	};
+
 	var TimezonePicker = function (_Component) {
 	  _inherits(TimezonePicker, _Component);
 
-	  function TimezonePicker() {
-	    var _Object$getPrototypeO;
-
-	    var _temp, _this, _ret;
-
+	  function TimezonePicker(props) {
 	    _classCallCheck(this, TimezonePicker);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TimezonePicker).call(this, props));
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TimezonePicker)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      isOpen: false,
+	    _this.filterItems = _this.filterItems.bind(_this);
+	    _this.getTimezone = _this.getTimezone.bind(_this);
+	    _this.handleBlur = _this.handleBlur.bind(_this);
+	    _this.handleFilterChange = _this.handleFilterChange.bind(_this);
+	    _this.handleFocus = _this.handleFocus.bind(_this);
+	    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
+	    _this.handleMouseOver = _this.handleMouseOver.bind(_this);
+	    _this.handleSelect = _this.handleSelect.bind(_this);
+	    _this.scrollToIndex = _this.scrollToIndex.bind(_this);
+	    _this.zoneCompare = _this.zoneCompare.bind(_this);
+
+	    _this.state = {
 	      focused: 0,
-	      value: _this.props.value || _this.props.initialValue,
-	      timezones: _this.props.timezones
-	    }, _this.handleFocus = function () {
-	      var _this$state = _this.state;
-	      var value = _this$state.value;
-	      var timezones = _this$state.timezones;
-
-
-	      if (value) {
-	        var keyz = (0, _keys2.default)(timezones);
-
-	        var _loop = function _loop(i) {
-	          if (keyz[i] === value || timezones[keyz[i]] === value) {
-	            return {
-	              v: _this.setState({ isOpen: true, focused: i }, function () {
-	                _this.scrollToIndex(i);
-	              })
-	            };
-	          }
-	        };
-
-	        for (var i = 0; i < keyz.length; ++i) {
-	          var _ret2 = _loop(i);
-
-	          if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
-	        }
-	      }
-
-	      _this.setState({ isOpen: true });
-	    }, _this.handleBlur = function () {
-	      var tz = _this.getTimezone(_this.state.value);
-
-	      if (tz === undefined) {
-	        _this.setState({ value: '', timezones: _this.props.timezones });
-	        _this.props.onChange('');
-	      }
-
-	      _this.setState({ isOpen: false });
-	    }, _this.handleFilterChange = function (e) {
-	      var timezones = _this.filterItems(e.target.value);
-
-	      _this.setState({
-	        timezones: timezones,
-	        isOpen: (0, _keys2.default)(timezones).length > 0,
-	        focused: 0,
-	        value: e.target.value || ''
-	      });
-	    }, _this.handleKeyPress = function (e) {
-	      var _this$state2 = _this.state;
-	      var focused = _this$state2.focused;
-	      var timezones = _this$state2.timezones;
-	      var isOpen = _this$state2.isOpen;
-
-
-	      if (e.which === UP_KEY || e.which === DOWN_KEY) {
-	        e.preventDefault();
-
-	        if (!isOpen) {
-	          return _this.setState({ isOpen: true }, _this.handleFocus);
-	        }
-
-	        var newFocused = void 0;
-
-	        if (e.which === UP_KEY) {
-	          newFocused = focused === 0 ? (0, _keys2.default)(timezones).length - 1 : focused - 1;
-	        } else {
-	          newFocused = focused === (0, _keys2.default)(timezones).length - 1 ? 0 : focused + 1;
-	        }
-
-	        _this.setState({ focused: newFocused });
-
-	        _this.scrollToIndex(newFocused);
-	      } else if (e.which === ENTER_KEY) {
-	        if (isOpen) {
-	          _this.handleSelect(focused);
-	        } else {
-	          e.target.blur();
-	        }
-	      }
-	    }, _this.handleSelect = function (index) {
-	      var timezones = _this.state.timezones;
-
-
-	      var key = (0, _keys2.default)(timezones)[index] || '';
-	      var value = timezones[key] || '';
-
-	      _this.props.onChange(value);
-
-	      _this.setState({
-	        focused: 0,
-	        isOpen: false,
-	        timezones: _this.props.timezones,
-	        value: key
-	      }, function () {
-	        return (0, _reactDom.findDOMNode)(_this.input).blur();
-	      });
-	    }, _this.handleMouseOver = function (idx, e) {
-	      if (e.pageX !== _this.mouseX || e.pageY !== _this.mouseY) {
-	        if (_this.disableMouse) {
-	          _this.disableMouse = false;
-	          _this.mouseY = e.pageY;
-	          return;
-	        }
-
-	        _this.mouseX = e.pageX;
-	        _this.mouseY = e.pageY;
-	        _this.setState({ focused: idx });
-	      }
-	    }, _this.getTimezone = function (query) {
-	      if (!query) {
-	        return null;
-	      }
-
-	      return (0, _keys2.default)(_this.props.timezones).find(function (zone) {
-	        return zone === query || _this.props.timezones[zone] === query;
-	      });
-	    }, _this.zoneCompare = function (key, filter) {
-	      return key.toLowerCase().includes(filter.toLowerCase().trim());
-	    }, _this.filterItems = function (filter) {
-	      var timezones = _this.props.timezones;
-
-
-	      if (filter.trim().length === 0) {
-	        return timezones;
-	      }
-
-	      var filteredTimezones = {};
-
-	      (0, _keys2.default)(timezones).forEach(function (key) {
-	        if (_this.zoneCompare(key, filter) || _this.zoneCompare(timezones[key], filter)) {
-	          filteredTimezones[key] = timezones[key];
-	        }
-	      });
-
-	      return filteredTimezones;
-	    }, _this.scrollToIndex = function (idx) {
-	      var index = Math.max(0, idx - 3);
-
-	      _this.disableMouse = true;
-	      (0, _reactDom.findDOMNode)(_this.list).scrollTop = _this.list.children[index].offsetTop;
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	      isOpen: false,
+	      timezones: _this.props.timezones,
+	      value: props.value || props.initialValue
+	    };
+	    return _this;
 	  }
 
 	  _createClass(TimezonePicker, [{
@@ -270,13 +153,189 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  }, {
-	    key: 'render',
-	    value: function render() {
+	    key: 'handleBlur',
+	    value: function handleBlur() {
+	      var tz = this.getTimezone(this.state.value);
+
+	      if (tz === undefined) {
+	        this.setState({ value: '', timezones: this.props.timezones });
+	        this.props.onChange('');
+	      }
+
+	      this.setState({ isOpen: false });
+	    }
+	  }, {
+	    key: 'handleFilterChange',
+	    value: function handleFilterChange(e) {
+	      var timezones = this.filterItems(e.target.value);
+
+	      this.setState({
+	        focused: 0,
+	        isOpen: Object.keys(timezones).length > 0,
+	        value: e.target.value || '',
+	        timezones: timezones
+	      });
+	    }
+	  }, {
+	    key: 'handleFocus',
+	    value: function handleFocus() {
 	      var _this2 = this;
 
 	      var _state = this.state;
 	      var value = _state.value;
-	      var isOpen = _state.isOpen;
+	      var timezones = _state.timezones;
+
+
+	      if (value) {
+	        var keyz = Object.keys(timezones);
+
+	        var _loop = function _loop(i) {
+	          if (keyz[i] === value || timezones[keyz[i]] === value) {
+	            return {
+	              v: _this2.setState({ isOpen: true, focused: i }, function () {
+	                _this2.scrollToIndex(i);
+	              })
+	            };
+	          }
+	        };
+
+	        for (var i = 0; i < keyz.length; ++i) {
+	          var _ret = _loop(i);
+
+	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        }
+	      }
+
+	      this.setState({ isOpen: true });
+	    }
+	  }, {
+	    key: 'handleKeyPress',
+	    value: function handleKeyPress(e) {
+	      var _state2 = this.state;
+	      var focused = _state2.focused;
+	      var timezones = _state2.timezones;
+	      var isOpen = _state2.isOpen;
+
+
+	      if (e.which === UP_KEY || e.which === DOWN_KEY) {
+	        e.preventDefault();
+
+	        if (!isOpen) {
+	          return this.setState({ isOpen: true }, this.handleFocus);
+	        }
+
+	        var newFocused = void 0;
+
+	        if (e.which === UP_KEY) {
+	          newFocused = focused === 0 ? Object.keys(timezones).length - 1 : focused - 1;
+	        } else {
+	          newFocused = focused === Object.keys(timezones).length - 1 ? 0 : focused + 1;
+	        }
+
+	        this.setState({ focused: newFocused });
+
+	        this.scrollToIndex(newFocused);
+	      } else if (e.which === ENTER_KEY) {
+	        if (isOpen) {
+	          this.handleSelect(focused);
+	        } else {
+	          e.target.blur();
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'handleMouseOver',
+	    value: function handleMouseOver(idx, e) {
+	      if (e.pageX !== this.mouseX || e.pageY !== this.mouseY) {
+	        if (this.disableMouse) {
+	          this.disableMouse = false;
+	          this.mouseY = e.pageY;
+	          return;
+	        }
+
+	        this.mouseX = e.pageX;
+	        this.mouseY = e.pageY;
+	        this.setState({ focused: idx });
+	      }
+	    }
+	  }, {
+	    key: 'handleSelect',
+	    value: function handleSelect(index) {
+	      var _this3 = this;
+
+	      var timezones = this.state.timezones;
+
+
+	      var key = Object.keys(timezones)[index] || '';
+	      var value = timezones[key] || '';
+
+	      this.props.onChange(value);
+
+	      this.setState({
+	        focused: 0,
+	        isOpen: false,
+	        timezones: this.props.timezones,
+	        value: key
+	      }, function () {
+	        (0, _reactDom.findDOMNode)(_this3.input).blur();
+	      });
+	    }
+	  }, {
+	    key: 'getTimezone',
+	    value: function getTimezone(query) {
+	      var _this4 = this;
+
+	      if (!query) {
+	        return null;
+	      }
+
+	      return Object.keys(this.props.timezones).find(function (zone) {
+	        return zone === query || _this4.props.timezones[zone] === query;
+	      });
+	    }
+	  }, {
+	    key: 'filterItems',
+	    value: function filterItems(filter) {
+	      var _this5 = this;
+
+	      var timezones = this.props.timezones;
+
+
+	      if (filter.trim().length === 0) {
+	        return timezones;
+	      }
+
+	      var filteredTimezones = {};
+
+	      Object.keys(timezones).forEach(function (key) {
+	        if (_this5.zoneCompare(key, filter) || _this5.zoneCompare(timezones[key], filter)) {
+	          filteredTimezones[key] = timezones[key];
+	        }
+	      });
+
+	      return filteredTimezones;
+	    }
+	  }, {
+	    key: 'scrollToIndex',
+	    value: function scrollToIndex(idx) {
+	      var index = Math.max(0, idx - 3);
+
+	      this.disableMouse = true;
+	      (0, _reactDom.findDOMNode)(this.list).scrollTop = this.list.children[index].offsetTop;
+	    }
+	  }, {
+	    key: 'zoneCompare',
+	    value: function zoneCompare(key, filter) {
+	      return key.toLowerCase().includes(filter.toLowerCase().trim());
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this6 = this;
+
+	      var _state3 = this.state;
+	      var value = _state3.value;
+	      var isOpen = _state3.isOpen;
 	      var _props = this.props;
 	      var className = _props.className;
 	      var style = _props.style;
@@ -292,20 +351,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var listClass = (0, _classnames2.default)('timezone-picker-list', 'timezone-picker-list-' + (absolute ? 'abs' : 'rel'));
 
-	      var timezones = (0, _keys2.default)(this.state.timezones).map(function (zone, idx) {
-	        var focused = _this2.state.focused === idx;
+	      var timezones = Object.keys(this.state.timezones).map(function (zone, idx) {
+	        var focused = _this6.state.focused === idx;
 
 	        return _react2.default.createElement(
 	          'li',
 	          {
-	            key: idx,
+	            className: (0, _classnames2.default)('timezone-picker-list-item', { 'timezone-picker-list-item-active': focused }),
+	            key: zone,
 	            onMouseDown: function onMouseDown() {
-	              return _this2.handleSelect(idx);
+	              _this6.handleSelect(idx);
 	            },
 	            onMouseOver: function onMouseOver(e) {
-	              return _this2.handleMouseOver(idx, e);
-	            },
-	            className: (0, _classnames2.default)('timezone-picker-list-item', { 'timezone-picker-list-item-active': focused })
+	              _this6.handleMouseOver(idx, e);
+	            }
 	          },
 	          zone
 	        );
@@ -313,25 +372,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return _react2.default.createElement(
 	        'div',
-	        { style: style, className: containerClasses },
+	        { className: containerClasses, style: style },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'timezone-picker-textfield' },
 	          _react2.default.createElement(_FormControl2.default, {
-	            placeholder: placeholder,
-	            onFocus: this.handleFocus,
-	            onBlur: this.handleBlur,
 	            onChange: this.handleFilterChange,
+	            onBlur: this.handleBlur,
+	            onFocus: this.handleFocus,
 	            onKeyDown: this.handleKeyPress,
-	            value: this.getTimezone(value) || value,
+	            placeholder: placeholder,
 	            ref: function ref(c) {
-	              return _this2.input = c;
-	            }
+	              _this6.input = c;
+	            },
+	            value: this.getTimezone(value) || value
 	          }),
 	          isOpen && _react2.default.createElement(
 	            'ul',
 	            { className: listClass, ref: function ref(c) {
-	                return _this2.list = c;
+	                _this6.list = c;
 	              } },
 	            timezones
 	          )
@@ -343,23 +402,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return TimezonePicker;
 	}(_react.Component);
 
-	TimezonePicker.propTypes = {
-	  className: _react.PropTypes.string,
-	  placeholder: _react.PropTypes.string,
-	  style: _react.PropTypes.any,
-	  timezones: _react.PropTypes.object,
-	  initialValue: _react.PropTypes.string,
-	  value: _react.PropTypes.string,
-	  onChange: _react.PropTypes.func,
-	  absolute: _react.PropTypes.bool
-	};
-	TimezonePicker.defaultProps = {
-	  timezones: _timezones2.default,
-	  initialValue: '',
-	  placeholder: '',
-	  onChange: function onChange() {},
-	  overflow: false
-	};
+	TimezonePicker.propTypes = propTypes;
+	TimezonePicker.defaultProps = defaultProps;
+
 	exports.default = TimezonePicker;
 
 /***/ },
@@ -494,22 +539,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = require("lodash/keys");
+	module.exports = require("react");
 
 /***/ },
 /* 5 */
 /***/ function(module, exports) {
 
-	module.exports = require("react");
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
 	module.exports = require("react-bootstrap/lib/FormControl");
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-dom");

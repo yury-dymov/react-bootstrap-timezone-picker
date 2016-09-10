@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-timezone-picker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Timezone picker for react-bootstrap",
   "main": "dist/react-bootstrap-timezone-picker.min.js",
   "scripts": {
@@ -40,9 +40,9 @@
     "eslint-plugin-import": "^1.12.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "postcss-loader": "^0.9.1",
-    "react": "^15.2.0",
-    "react-bootstrap": "^0.30.1",
-    "react-dom": "^15.2.0",
+    "react": "^15.3.0",
+    "react-bootstrap": "^0.30.3",
+    "react-dom": "^15.3.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.2",
@@ -54,7 +54,6 @@
     "react-bootstrap": "*"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "lodash": "^4.14.1"
+    "classnames": "^2.2.5"
   }
 }
