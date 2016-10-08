@@ -3,7 +3,7 @@ import ReactDOM             from 'react-dom';
 import TimezonePicker       from '../dist/react-bootstrap-timezone-picker';
 
 class Main extends Component {
-  state = { currentValue: 'America/Mazatlan', absolute: false };
+  state = { currentValue: '', absolute: false };
 
   handleChange = (newValue) => this.setState({ currentValue: newValue });
 
@@ -19,10 +19,10 @@ class Main extends Component {
           </button>
         </div>
         <TimezonePicker
-          initialValue  = {this.state.currentValue}
-          placeholder   = 'Select timezone...'
+          placeholder   = "Select timezone..."
           onChange      = {this.handleChange}
           absolute      = {this.state.absolute}
+          value         = {this.state.currentValue}
         />
         <div>Current Value: <b>{this.state.currentValue}</b></div>
       </div>

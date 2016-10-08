@@ -6,7 +6,7 @@ var ExtractTextPlugin   = require('extract-text-webpack-plugin');
 module.exports = {
   output:  {
     library: 'react-bootstrap-timezone-picker',
-    libraryTarget: 'umd'
+    libraryTarget: 'commonjs2'
   },
   externals: [nodeExternals()],
   plugins: [
@@ -21,7 +21,7 @@ module.exports = {
   ],
   module:  {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel!eslint', exclude: /node_modules/ },
+      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
       { test: /\.json$/, loader: 'json',  exclude: /node_modules/ },
       { test: /\.css$/,  loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader') }
     ]
