@@ -306,15 +306,6 @@ describe('onChange', () => {
     component.find('input').simulate('keyDown', { which: KEY_ENTER });
   });
 
-  it('enter while option list is closed should blur input', () => {
-    const component = mount(<TimezonePicker />);
-
-    component.find('input').simulate('change', { target: { value: '(GMT+02:00) Kiev' } });
-    component.find('input').simulate('keyDown', { which: KEY_ENTER });
-
-    expect(Object.keys(document.activeElement)).to.have.length(0);
-  });
-
   it('called after return pressed', (done) => {
     function handleChange(val) {
       expect(val).to.match(/Apia/);

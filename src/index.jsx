@@ -173,11 +173,7 @@ class TimezonePicker extends Component {
 
       this.scrollToIndex(newFocused);
     } else if (e.which === ENTER_KEY || e.which === RETURN_KEY) {
-      if (isOpen) {
-        this.handleSelect(focused);
-      } else {
-        e.target.blur();
-      }
+      this.handleSelect(focused);
     } else if (e.which === ESCAPE_KEY) {
       findDOMNode(this.refInput).blur();
       this.handleBlur();
