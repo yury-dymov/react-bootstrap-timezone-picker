@@ -19,10 +19,10 @@ import TimezonePicker from 'react-bootstrap-timezone-picker';
 import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
 ...
 <TimezonePicker
+  absoulte      = {false}
   defaultValue  = "Europe/Moscow"
   placeholder   = "Select timezone..."
   onChange      = {this.handleChange}
-  absolute
 />
 ...
 ```
@@ -33,7 +33,7 @@ Demo source code is available [here](https://github.com/yury-dymov/react-bootstr
 
 | Prop        | Type           | Default  | Description |
 | ------------- |:-------------:| :-----:|:-----------|
-| absolute      | bool       | false |    Control time zone list overflow. Please check [demo](https://yury-dymov.github.io/react-bootstrap-timezone-picker) for more details. |
+| absolute      | bool       | true |    Control time zone list overflow. Please check [demo](https://yury-dymov.github.io/react-bootstrap-timezone-picker) for more details. |
 | className      | string       | none |     Class name for container |
 | defaultValue      | string       | none |     Initial time zone can be provided |
 | onChange(newValue: string)      | func       | none |    Triggered on user selection |
