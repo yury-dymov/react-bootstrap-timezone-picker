@@ -123,6 +123,14 @@ describe('placeholder, defaultValue, initialValue, value', () => {
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Apia/);
   });
+
+  it('newValue is updating old value', () => {
+    const component = mount(<TimezonePicker value="Pacific/Apia" />);
+
+    component.setProps({ value: 'Europe/Moscow' });
+
+    expect(component.find('input')).to.have.attr('value').match(/Moscow/);
+  });
 });
 
 describe('option list', () => {
@@ -277,6 +285,15 @@ describe('onChange', () => {
     component.instance().handleFocus();
     component.find('input').simulate('keyDown', { which: KEY_UP });
     component.find('input').simulate('keyDown', { which: KEY_ENTER });
+  });
+
+  it('enter while option list is closed should blur input', () => {
+    const component = mount(<TimezonePicker />);
+
+    component.find('input').simulate('change', { target: { value: '(GMT+02:00) Kiev' } });
+    component.find('input').simulate('keyDown', { which: KEY_ENTER });
+
+    expect(Object.keys(document.activeElement)).to.have.length(0);
   });
 
   it('called after return pressed', (done) => {

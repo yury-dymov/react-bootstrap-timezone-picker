@@ -161,14 +161,6 @@ class TimezonePicker extends Component {
     if (e.which === UP_KEY || e.which === DOWN_KEY) {
       e.preventDefault();
 
-      if (!isOpen) {
-        this.setState({ isOpen: true }, this.handleFocus);
-
-        this.props.onKeyDown(e);
-
-        return;
-      }
-
       let newFocused;
 
       if (e.which === UP_KEY) {
