@@ -8,7 +8,12 @@ Time zone picker for react-bootstrap - [DEMO](https://yury-dymov.github.io/react
 [![Build Status](https://img.shields.io/travis/yury-dymov/react-bootstrap-timezone-picker/master.svg?style=flat)](https://travis-ci.org/yury-dymov/react-bootstrap-timezone-picker)
 [![Coverage Status](https://coveralls.io/repos/github/yury-dymov/react-bootstrap-timezone-picker/badge.svg?branch=master)](https://coveralls.io/github/yury-dymov/react-bootstrap-timezone-picker?branch=master)
 
-# Usage
+# Installation
+```Bash
+npm install react-bootstrap-timezone-picker
+```
+
+# Usage Example
 ```JavaScript
 import TimezonePicker from 'react-bootstrap-timezone-picker';
 import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
