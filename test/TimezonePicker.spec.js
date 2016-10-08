@@ -259,6 +259,25 @@ describe('option list', () => {
     expect(component.find('input')).to.have.attr('value').match(/Apia/);
     expect(component.find('.timezone-picker-list')).to.have.length(0);
   });
+
+  it('if input is empty, show all options', () => {
+    const component = mount(<TimezonePicker />);
+
+    component.instance().handleFocus();
+
+    const countBefore = component.find('li').length;
+
+    component.find('input').simulate('change', { target: { value: 'kie' } });
+
+    const countMiddle = component.find('li').length;
+
+    component.find('input').simulate('change', { target: { value: '' } });
+
+    const countAfter = component.find('li').length;
+
+    expect(countBefore).to.equal(countAfter);
+    expect(countBefore).not.to.equal(countMiddle);
+  });
 });
 
 describe('onChange', () => {
