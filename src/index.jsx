@@ -13,6 +13,7 @@ const ENTER_KEY = 13;
 const propTypes = {
   absolute:     PropTypes.bool,
   className:    PropTypes.string,
+  defaultValue: PropTypes.any,
   initialValue: PropTypes.any,
   onChange:     PropTypes.func,
   placeholder:  PropTypes.string,
@@ -22,6 +23,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  defaultValue: '',
   initialValue: '',
   placeholder:  '',
   onChange:     () => {},
@@ -40,7 +42,7 @@ class TimezonePicker extends Component {
     this.handleMouseOver    = this.handleMouseOver.bind(this);
     this.handleSelect       = this.handleSelect.bind(this);
     this.getTimezone        = this.getTimezone.bind(this);
-    this.filterItems        = this.filterItems.bind(this);    
+    this.filterItems        = this.filterItems.bind(this);
     this.scrollToIndex      = this.scrollToIndex.bind(this);
     this.zoneCompare        = this.zoneCompare.bind(this);
 
@@ -48,7 +50,7 @@ class TimezonePicker extends Component {
       focused:    0,
       isOpen:     false,
       timezones:  this.props.timezones,
-      value:      props.value || props.initialValue,
+      value:      props.value || props.defaultValue || props.initialValue,
     };
   }
 
