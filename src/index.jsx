@@ -130,8 +130,9 @@ class TimezonePicker extends Component {
     });
   }
 
-  handleFocus() {
+  handleFocus(ev) {
     const { value, timezones } = this.state;
+    if (ev) ev.target.select();
 
     if (value) {
       const keyz = Object.keys(timezones);
@@ -143,7 +144,7 @@ class TimezonePicker extends Component {
             () => { this.scrollToIndex(i); }
           );
 
-          this.props.onFocus();
+          this.props.onFocus(ev);
 
           return;
         }
