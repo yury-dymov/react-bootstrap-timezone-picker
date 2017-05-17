@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-timezone-picker",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Timezone picker for react-bootstrap",
   "main": "dist/react-bootstrap-timezone-picker.min.js",
   "scripts": {
