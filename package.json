@@ -67,6 +67,7 @@
     "react-bootstrap": "*"
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "prop-types": "^15.5.10"
   }
 }

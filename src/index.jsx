@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import FormControl from 'react-bootstrap/lib/FormControl';
@@ -41,7 +42,7 @@ const defaultProps = {
   timezones: defaultTimezones,
 };
 
-class TimezonePicker extends Component {
+class TimezonePicker extends React.Component {
   static zoneCompare(key, filter) {
     return key.toLowerCase().indexOf(filter.toLowerCase().trim()) !== -1;
   }
@@ -159,7 +160,7 @@ class TimezonePicker extends Component {
   }
 
   handleKeyPress(e) {
-    const { focused, timezones, isOpen } = this.state;
+    const { focused, timezones } = this.state;
 
     if (e.which === UP_KEY || e.which === DOWN_KEY) {
       e.preventDefault();
