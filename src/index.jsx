@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import { Input } from 'reactstrap';
 import defaultTimezones from './timezones.json';
 
 import './index.css';
@@ -37,7 +37,6 @@ const defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onKeyDown: () => {},
-  overflow: false,
   style: {},
   timezones: defaultTimezones,
 };
@@ -265,7 +264,7 @@ class TimezonePicker extends React.Component {
     return (
       <div className={containerClasses} style={style}>
         <div className="timezone-picker-textfield">
-          <FormControl
+          <Input
             onBlur={this.handleBlur}
             onChange={this.handleFilterChange}
             onFocus={this.handleFocus}

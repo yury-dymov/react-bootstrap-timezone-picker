@@ -1,7 +1,8 @@
 .timezone-picker {
     display: inline-block;
     font: 13px sans-serif;
-    position: relative
+    position: relative;
+    width: 100%
 }
 
 .timezone-picker-textfield input {
