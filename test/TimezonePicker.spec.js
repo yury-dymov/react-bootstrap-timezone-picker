@@ -147,7 +147,7 @@ describe('option list', () => {
 
     component.find('input').simulate('change', { target: { value: 'ki' } });
 
-    expect(component.find('.timezone-picker-list > li')).to.have.length(3);
+    expect(component.find('.timezone-picker-list > li')).to.have.length(4);
 
     component.find('input').simulate('change', { target: { value: 'kie' } });
 
@@ -161,7 +161,7 @@ describe('option list', () => {
 
     expect(component.find('.timezone-picker-list')).to.have.length(1);
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Niue/);
   });
 
   it('pressing down makes next option active', () => {
@@ -169,11 +169,11 @@ describe('option list', () => {
 
     component.instance().handleFocus();
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Niue/);
 
     component.find('input').simulate('keyDown', { which: KEY_DOWN });
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Hawaii/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
   });
 
   it('pressing down on last option makes first option active', () => {
@@ -181,11 +181,11 @@ describe('option list', () => {
 
     component.instance().handleFocus();
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Niue/);
 
     component.find('input').simulate('keyDown', { which: KEY_DOWN });
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Hawaii/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
   });
 
   it('pressing up makes previous option active', () => {
@@ -207,7 +207,7 @@ describe('option list', () => {
 
     component.find('input').simulate('keyDown', { which: KEY_UP });
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Apia/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Kiritimati/);
   });
 
   it('escape pressed: option list is removed 1/2, good value persists', () => {
@@ -237,7 +237,7 @@ describe('option list', () => {
     component.find('li').first().simulate('mouseEnter', { pageX: 1, pageY: 2 });
     component.instance().handleMouseEnter(0, { pageX: 1, pageY: 2 });
 
-    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
+    expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Niue/);
   });
 
   it('mouse click hides options and updates value', () => {
@@ -246,7 +246,7 @@ describe('option list', () => {
     component.instance().handleFocus();
     component.find('li').last().simulate('mouseDown');
 
-    expect(component.find('input')).to.have.attr('value').match(/Apia/);
+    expect(component.find('input')).to.have.attr('value').match(/Kiritimati/);
     expect(component.find('.timezone-picker-list')).to.have.length(0);
   });
 
@@ -256,7 +256,7 @@ describe('option list', () => {
     component.instance().handleFocus();
     component.find('li').last().simulate('touchStart');
 
-    expect(component.find('input')).to.have.attr('value').match(/Apia/);
+    expect(component.find('input')).to.have.attr('value').match(/Kiritimati/);
     expect(component.find('.timezone-picker-list')).to.have.length(0);
   });
 
@@ -283,7 +283,7 @@ describe('option list', () => {
 describe('onChange', () => {
   it('called after mouse click', (done) => {
     function handleChange(val) {
-      expect(val).to.match(/Apia/);
+      expect(val).to.match(/Kiritimati/);
       done();
     }
 
@@ -295,7 +295,7 @@ describe('onChange', () => {
 
   it('called after enter pressed', (done) => {
     function handleChange(val) {
-      expect(val).to.match(/Apia/);
+      expect(val).to.match(/Kiritimati/);
       done();
     }
 
@@ -308,7 +308,7 @@ describe('onChange', () => {
 
   it('called after return pressed', (done) => {
     function handleChange(val) {
-      expect(val).to.match(/Apia/);
+      expect(val).to.match(/Kiritimati/);
       done();
     }
 
