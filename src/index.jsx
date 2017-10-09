@@ -25,6 +25,7 @@ const propTypes = {
   placeholder: PropTypes.string,
   timezones: PropTypes.object,
   style: PropTypes.object,
+  disabled: PropTypes.bool,
   value: PropTypes.any,
 };
 
@@ -39,6 +40,7 @@ const defaultProps = {
   onKeyDown: () => {},
   overflow: false,
   style: {},
+  disabled: false,
   timezones: defaultTimezones,
 };
 
@@ -228,7 +230,7 @@ class TimezonePicker extends React.Component {
 
   render() {
     const { isOpen, value } = this.state;
-    const { absolute, className, placeholder, style, ...restProps } = this.props;
+    const { absolute, className, placeholder, style, disabled, ...restProps } = this.props;
 
     const rest = Object.assign({}, restProps);
 
@@ -269,6 +271,7 @@ class TimezonePicker extends React.Component {
             onBlur={this.handleBlur}
             onChange={this.handleFilterChange}
             onFocus={this.handleFocus}
+            disabled={disabled}
             onKeyDown={this.handleKeyPress}
             placeholder={placeholder}
             ref={(c) => { this.refInput = c; }}
