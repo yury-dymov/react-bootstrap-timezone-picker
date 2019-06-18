@@ -1,3 +1,6 @@
+# 2019-06-18 - Version 1.0.14
+* Removed unused default prop, specified react-bootstrap version limitation
+
 # 2017-10-09 - Version 1.0.12
 * Added `disabled` prop to support read-only use-cases (https://github.com/yury-dymov/react-bootstrap-timezone-picker/pull/6)
 

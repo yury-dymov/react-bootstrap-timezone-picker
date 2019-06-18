@@ -38,7 +38,6 @@ const defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onKeyDown: () => {},
-  overflow: false,
   style: {},
   disabled: false,
   timezones: defaultTimezones,
