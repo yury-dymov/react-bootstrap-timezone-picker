@@ -1,31 +1,25 @@
-import React                      from 'react';
-import { findDOMNode }            from 'react-dom';
-import chai, { expect }           from 'chai';
-import chaiEnzyme                 from 'chai-enzyme';
-import { shallow, mount, render } from 'enzyme';
-import jsdom                      from 'jsdom';
-import { spy }                    from 'sinon';
+import React from 'react';
+import chai, { expect } from 'chai';
+import chaiEnzyme from 'chai-enzyme';
+import Enzyme, { mount, shallow, render } from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
+import { spy } from 'sinon';
+
+Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 const KEY_UP = 38;
 const KEY_DOWN = 40;
-const KEY_RETURN = 13;
 const KEY_ENTER = 14;
 const KEY_ESCAPE = 27;
 
 chai.use(chaiEnzyme());
-
-const doc = jsdom.jsdom('<!doctype html><html><body><div id="app"></div></body></html>');
-
-global.document = doc;
-global.window = doc.defaultView;
-global.navigator = window.navigator;
 
 // We need to have `document` and `window` in global scope before requiring TextField
 const TimezonePicker = require('../dist/react-bootstrap-timezone-picker').default;
 
 describe('className style and events are propagated', () => {
   it('className: rnd-1234 -> .rnd-1234', () => {
-    const component = render(<TimezonePicker className="rnd-1234" />);
+    const component = shallow(<TimezonePicker className="rnd-1234" />);
 
     expect(component.find('.rnd-1234')).to.have.length(1);
   });
@@ -120,6 +114,7 @@ describe('placeholder, defaultValue, initialValue, value', () => {
     const component = mount(<TimezonePicker initialValue="Pacific/Apia" />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Apia/);
   });
@@ -158,9 +153,9 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list')).to.have.length(1);
-
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
   });
 
@@ -168,10 +163,12 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
 
     component.find('input').simulate('keyDown', { which: KEY_DOWN });
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Hawaii/);
   });
@@ -180,10 +177,12 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
 
     component.find('input').simulate('keyDown', { which: KEY_DOWN });
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Hawaii/);
   });
@@ -192,10 +191,12 @@ describe('option list', () => {
     const component = mount(<TimezonePicker defaultValue="Pacific/Honolulu" />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Hawaii/);
 
     component.find('input').simulate('keyDown', { which: KEY_UP });
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
   });
@@ -234,8 +235,10 @@ describe('option list', () => {
     const component = mount(<TimezonePicker defaultValue="Pacific/Honolulu" />);
 
     component.instance().handleFocus();
+    component.update();
     component.find('li').first().simulate('mouseEnter', { pageX: 1, pageY: 2 });
     component.instance().handleMouseEnter(0, { pageX: 1, pageY: 2 });
+    component.update();
 
     expect(component.find('.timezone-picker-list-item-active')).to.have.html().match(/Pago/);
   });
@@ -244,7 +247,9 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
-    component.find('li').last().simulate('mouseDown');
+    component.update();
+    component.find('li').last().simulate('mouseDown');    
+    component.update();
 
     expect(component.find('input')).to.have.attr('value').match(/Apia/);
     expect(component.find('.timezone-picker-list')).to.have.length(0);
@@ -254,7 +259,9 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
     component.find('li').last().simulate('touchStart');
+    component.update();
 
     expect(component.find('input')).to.have.attr('value').match(/Apia/);
     expect(component.find('.timezone-picker-list')).to.have.length(0);
@@ -264,14 +271,17 @@ describe('option list', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
 
     const countBefore = component.find('li').length;
 
     component.find('input').simulate('change', { target: { value: 'kie' } });
+    component.update();
 
     const countMiddle = component.find('li').length;
 
     component.find('input').simulate('change', { target: { value: '' } });
+    component.update();
 
     const countAfter = component.find('li').length;
 
@@ -290,7 +300,9 @@ describe('onChange', () => {
     const component = mount(<TimezonePicker onChange={handleChange}/>);
 
     component.instance().handleFocus();
+    component.update();
     component.find('li').last().simulate('mouseDown');
+    component.update();
   });
 
   it('called after enter pressed', (done) => {
@@ -332,7 +344,7 @@ describe('onChange', () => {
 });
 
 it('passing timezones', () => {
-  const component = mount(<TimezonePicker timezones={{ tz1: "tz1", tz2: "tz2" }}/>);
+  const component = shallow(<TimezonePicker timezones={{ tz1: "tz1", tz2: "tz2" }}/>);
 
   component.instance().handleFocus();
 
@@ -344,6 +356,7 @@ describe('absolute prop', () => {
     const component = mount(<TimezonePicker absolute />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-rel')).to.have.length(0);
     expect(component.find('.timezone-picker-list-abs')).to.have.length(1);
@@ -353,6 +366,7 @@ describe('absolute prop', () => {
     const component = mount(<TimezonePicker absolute={false} />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-rel')).to.have.length(1);
     expect(component.find('.timezone-picker-list-abs')).to.have.length(0);
@@ -362,6 +376,7 @@ describe('absolute prop', () => {
     const component = mount(<TimezonePicker />);
 
     component.instance().handleFocus();
+    component.update();
 
     expect(component.find('.timezone-picker-list-rel')).to.have.length(0);
     expect(component.find('.timezone-picker-list-abs')).to.have.length(1);

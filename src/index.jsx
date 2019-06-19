@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import FormControl from 'react-bootstrap/FormControl';
 import defaultTimezones from './timezones.json';
 
 import './index.css';
@@ -145,7 +145,7 @@ class TimezonePicker extends React.Component {
         if (keyz[i] === value || timezones[keyz[i]] === value) {
           this.setState(
             { isOpen: true, focused: i },
-            () => { this.scrollToIndex(i); }
+            () => { this.scrollToIndex(i); },
           );
 
           this.props.onFocus(ev);
@@ -229,7 +229,14 @@ class TimezonePicker extends React.Component {
 
   render() {
     const { isOpen, value } = this.state;
-    const { absolute, className, placeholder, style, disabled, ...restProps } = this.props;
+    const {
+      absolute,
+      className,
+      placeholder,
+      style,
+      disabled,
+      ...restProps
+    } = this.props;
 
     const rest = Object.assign({}, restProps);
 
@@ -243,7 +250,8 @@ class TimezonePicker extends React.Component {
       {
         'timezone-picker-open': isOpen,
         'timezone-picker-selected': isSelected,
-      });
+      },
+    );
 
     const listClass = classnames('timezone-picker-list', `timezone-picker-list-${absolute ? 'abs' : 'rel'}`);
 
@@ -277,9 +285,11 @@ class TimezonePicker extends React.Component {
             value={this.getTimezone(value) || value}
             {...rest}
           />
-          {isOpen && <ul className={listClass} ref={(c) => { this.list = c; }}>
-            {timezones}
-          </ul>}
+          {isOpen && (
+            <ul className={listClass} ref={(c) => { this.list = c; }}>
+              {timezones}
+            </ul>
+          )}
         </div>
       </div>
     );

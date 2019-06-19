@@ -4,7 +4,11 @@
   "rules": {
     "import/no-extraneous-dependencies": 0,
     "max-len": [2, 128],
-    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
-    "react/no-find-dom-node": 0
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "react/no-find-dom-node": 0,
+    "react/require-default-props": 0,
+    "react/forbid-prop-types": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "react/destructuring-assignment": 0
   }
 }

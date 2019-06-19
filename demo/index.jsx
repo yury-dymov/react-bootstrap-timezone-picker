@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import ReactDOM             from 'react-dom';
 import TimezonePicker       from '../dist/react-bootstrap-timezone-picker';
 
 class Main extends Component {
-  state = { currentValue: '', absolute: false };
+  constructor(props) {
+    super(props);
 
-  handleChange = (newValue) => this.setState({ currentValue: newValue });
+    this.state = { currentValue: '', absolute: false };
 
-  handleToggle = () => this.setState({ absolute: !this.state.absolute });
+    this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+  }  
+
+  handleChange(newValue) {
+    this.setState({ currentValue: newValue });
+  }
+
+  handleToggle() {
+    this.setState({ absolute: !this.state.absolute });
+  }
 
   render() {
     return (

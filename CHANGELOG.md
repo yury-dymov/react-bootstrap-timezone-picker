@@ -1,3 +1,6 @@
+# 2019-06-18 - Version 2.0.0
+* Updated for usage with `react-bootstrap`
+
 # 2019-06-18 - Version 1.0.14
 * Removed unused default prop, specified react-bootstrap version limitation
 
