@@ -108,7 +108,7 @@ class TimezonePicker extends React.Component {
   handleBlur() {
     const tz = this.getTimezone(this.state.value);
 
-    if (tz === undefined) {
+    if (tz === undefined || tz === null) {
       this.setState({ value: '', timezones: this.props.timezones });
       if (this.prevValue) {
         this.props.onChange('');
