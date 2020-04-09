@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM             from 'react-dom';
 import TimezonePicker       from '../dist/react-bootstrap-timezone-picker';
 
 class Main extends Component {
