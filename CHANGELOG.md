@@ -1,3 +1,6 @@
+# 2020-04-09 - Version 2.0.1
+* onChange is called now when input value is empty string - https://github.com/yury-dymov/react-bootstrap-timezone-picker/pull/12
+
 # 2019-06-18 - Version 2.0.0
 * Updated for usage with `react-bootstrap`
 
