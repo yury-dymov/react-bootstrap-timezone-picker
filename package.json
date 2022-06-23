@@ -49,7 +49,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "extract-text-webpack-plugin": "^3.0.2",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "react": "^16.8.6",
